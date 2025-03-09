@@ -44,15 +44,12 @@ sudo chmod -R 755 /var/www/pterodactyl
 
 cd /var/www/pterodactyl
 sudo composer install --no-dev --optimize-autoloader
-
 sudo cp .env.example .env
-
 sudo php artisan key:generate
 
 sudo sed -i "s/DB_DATABASE=laravel/DB_DATABASE=panel/" .env
 sudo sed -i "s/DB_USERNAME=root/DB_USERNAME=pterodactyl/" .env
 sudo sed -i "s/DB_PASSWORD=/DB_PASSWORD=$MYSQL_PASSWORD/" .env
-
 sudo php artisan migrate --seed --force
 
 sudo apt install -y nginx
@@ -84,10 +81,8 @@ EOL
 sudo ln -s /etc/nginx/sites-available/pterodactyl /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl restart nginx
-
 sudo apt install -y certbot python3-certbot-nginx
 sudo certbot --nginx -d $DOMAIN_NAME
-
 sudo systemctl status certbot.timer || {
     echo "Setting up automatic renewal for SSL certificates."
     echo "0 0 * * * /usr/bin/certbot renew --quiet" | sudo crontab -
