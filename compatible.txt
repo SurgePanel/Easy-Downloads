@@ -1,0 +1,3 @@
+pterodactly => ubuntu
+jexactyl => ubuntu
+kubernetes => ubuntu

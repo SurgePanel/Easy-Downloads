@@ -80,7 +80,6 @@ EOL
 sudo ln -s /etc/nginx/sites-available/jexactyl /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl restart nginx
-
 sudo apt install -y certbot python3-certbot-nginx
 sudo certbot --nginx -d $DOMAIN_NAME
 
@@ -88,5 +87,4 @@ sudo systemctl status certbot.timer || {
     echo "Setting up automatic renewal for SSL certificates."
     echo "0 0 * * * /usr/bin/certbot renew --quiet" | sudo tee -a /etc/crontab
 }
-
 echo "Jexactyl installation complete. Access it at https://$DOMAIN_NAME"
